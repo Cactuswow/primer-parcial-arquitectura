@@ -1,5 +1,6 @@
 import express from 'express'
 import { environment } from './environment.js'
+import { PgConnection } from '../services/pgConnection.services.js'
 import { indexRoutes } from '../routes/index.routes.js'
 
 export class Server {
@@ -8,22 +9,16 @@ export class Server {
     this.port = environment.port
   }
 
-  // async connectionDB(){
-  //   new PgConnection();
-  // }
-
-  // middlewares(){
-  //   // configuro para que acepte objeto tipo JSON
-  //   this.app.use(express.json())
-  //   // activo el uso de middleware personalizado
-  //   this.app.use(middleware)
-  // }
+  async connectionDb () {
+    new PgConnection()
+  }
 
   routes () {
     this.app.use(indexRoutes)
   }
 
   runServer () {
+    this.connectionDb()
     this.routes()
     this.app.listen(this.port, () => {
       console.log(`Server is running on http://localhost:${this.port}`)
