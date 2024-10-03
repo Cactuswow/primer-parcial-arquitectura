@@ -4,34 +4,38 @@ export async function getAllProducts (req, res) {
   const dataProducts = await getProductsModel()
   res.status(200).json({
     success: true,
+    msg: 'Llegamos al getProducts',
     data: dataProducts
   })
 }
 
 export async function getProductOne (req, res) {
   const { idProduct } = req.params
-  const [inValid, dataProduct] = await getProductOneModel(idProduct)
-  if (inValid) {
-    res.status(422).json({
+  const [error, dataProduct] = await getProductOneModel(idProduct)
+  if (error) {
+    return res.status(422).json({
       success: false
     })
-    return
   }
+
   res.status(200).json({
     success: true,
+    msg: 'Llegamos al getProductOne',
     data: dataProduct
   })
 }
 
 export const postProduct = async (req, res) => {
   const { name, description, price } = req.body
-  const [inValid, data] = await postProductModel(name, description, price)
-  if (inValid) {
-    res.status(422).json({
-      success: false
+  const [error, data] = await postProductModel(name, description, price)
+
+  if (error) {
+    return res.status(422).json({
+      success: false,
+      msg: 'Error al crear el producto'
     })
-    return
   }
+
   res.status(200).json({
     success: true,
     msg: 'Llegamos al postProduct',
@@ -42,7 +46,15 @@ export const postProduct = async (req, res) => {
 export const putProduct = async (req, res) => {
   const { idProduct } = req.params
   const { name, description, price } = req.body
-  const data = await putProductModel(name, description, price, idProduct)
+  const [error, data] = await putProductModel(name, description, price, idProduct)
+
+  if (error) {
+    return res.status(422).json({
+      success: false,
+      msg: 'Error al actualizar el producto'
+    })
+  }
+
   res.status(200).json({
     success: true,
     msg: 'Llegamos al putProduct',
