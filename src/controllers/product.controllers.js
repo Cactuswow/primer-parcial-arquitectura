@@ -1,6 +1,6 @@
 import { deleteProductModel, getProductOneModel, getProductsModel, postProductModel, putProductModel } from '../models/product.models.js'
 
-export async function getAllProducts(req, res) {
+export async function getAllProducts (req, res) {
   const dataProducts = await getProductsModel()
   res.status(200).json({
     success: true,
@@ -8,9 +8,15 @@ export async function getAllProducts(req, res) {
   })
 }
 
-export async function getProductOne(req, res) {
+export async function getProductOne (req, res) {
   const { idProduct } = req.params
-  const dataProduct = await getProductOneModel(idProduct)
+  const [inValid, dataProduct] = await getProductOneModel(idProduct)
+  if (inValid) {
+    res.status(422).json({
+      success: false
+    })
+    return
+  }
   res.status(200).json({
     success: true,
     data: dataProduct
@@ -19,7 +25,13 @@ export async function getProductOne(req, res) {
 
 export const postProduct = async (req, res) => {
   const { name, description, price } = req.body
-  const data = await postProductModel(name, description, price)
+  const [inValid, data] = await postProductModel(name, description, price)
+  if (inValid) {
+    res.status(422).json({
+      success: false
+    })
+    return
+  }
   res.status(200).json({
     success: true,
     msg: 'Llegamos al postProduct',

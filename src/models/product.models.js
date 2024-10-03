@@ -8,9 +8,9 @@ export const getProductsModel = async () => {
 export const getProductOneModel = async (idProduct) => {
   try {
     const pg = new PgConnection()
-    return await pg.connection.query('SELECT * FROM PRODUCT WHERE ID_PRODUCT = $1', [idProduct])
+    return [false, await pg.connection.query('SELECT * FROM PRODUCT WHERE ID_PRODUCT = $1', [idProduct])]
   } catch (error) {
-    return []
+    return [true]
   }
 }
 
