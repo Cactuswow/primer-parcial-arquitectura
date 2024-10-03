@@ -6,3 +6,6 @@ export const indexRoutes = Router()
 
 indexRoutes.use('/api/product', productRoutes)
 indexRoutes.use('/auth', authRoutes)
+indexRoutes.use('*', (_req, res) => {
+  res.json({ message: 'Endpoint no definido' })
+})

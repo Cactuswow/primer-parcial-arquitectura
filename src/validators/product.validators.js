@@ -1,52 +1,44 @@
 import { checkSchema } from 'express-validator'
 
+const isInt = {
+  errorMessage: 'Debe ser un número entero'
+}
+
+const isString = {
+  errorMessage: 'Debe ser una cadena de texto'
+}
+
+const isFloat = {
+  errorMessage: 'Debe ser un número decimal'
+}
+
 export const getProductValidator = checkSchema(
   {
-    idProduct: {
-      isInt: { errorMessage: 'Debe ser un numero' }
-    }
+    idProduct: { isInt }
   }, ['params']
 )
 
 export const postProductValidator = checkSchema(
   {
-    name: {
-      isString: { errorMessage: 'El nombre debe ser una cadena de texto' }
-    },
-    description: {
-      isString: { errorMessage: 'La descripción debe ser una cadena de texto' }
-    },
-    price: {
-      isFLoat: { errorMessage: 'El precio debe ser numero decimal' }
-
-    }
+    name: { isString },
+    description: { isString },
+    price: { isFloat }
   }, ['body']
 )
 
 export const putProductValidator = checkSchema(
   {
-    idProduct: {
-      isInt: { errorMessage: 'Debe ser un numero' }
-    }
+    idProduct: { isInt }
   }, ['params'],
   {
-    name: {
-      isString: { errorMessage: 'El nombre debe ser una cadena de texto' }
-    },
-    description: {
-      isString: { errorMessage: 'La descripción debe ser una cadena de texto' }
-    },
-    price: {
-      isFLoat: { errorMessage: 'El precio debe ser numero decimal' }
-
-    }
+    name: { isString },
+    description: { isString },
+    price: { isFloat }
   }, ['body']
 )
 
 export const deleteProductValidator = checkSchema(
   {
-    idProduct: {
-      isInt: { errorMessage: 'Debe ser un numero' }
-    }
+    idProduct: { isInt }
   }, ['params']
 )

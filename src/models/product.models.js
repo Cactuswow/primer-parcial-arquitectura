@@ -25,14 +25,19 @@ export const postProductModel = async (name, description, price) => {
 
 export const putProductModel = async (name, description, price, idProduct) => {
   const pg = new PgConnection()
-  // eslint-disable-next-line no-template-curly-in-string
-  return await pg.connection.query('UPDATE PRODUCT SET NAME_PRODUCT = ${nom}, DESCRIPTION_PRODUCT = ${des}, PRICE_PRODUCT = ${pr} WHERE ID_PRODUCT = ${id} returning *'
-    , {
-      nom: name,
-      des: description,
-      pr: price,
-      id: idProduct
-    })
+  const body = {
+    nom: name,
+    des: description,
+    pr: price,
+    id: idProduct
+  }
+
+  try {
+    // eslint-disable-next-line no-template-curly-in-string
+    return [false, await pg.connection.query('UPDATE PRODUCT SET NAME_PRODUCT = ${nom}, DESCRIPTION_PRODUCT = ${des}, PRICE_PRODUCT = ${pr} WHERE ID_PRODUCT = ${id} returning *', body)]
+  } catch (error) {
+    return [true]
+  }
 }
 
 export const deleteProductModel = async (idProduct) => {
