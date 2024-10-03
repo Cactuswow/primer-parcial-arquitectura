@@ -8,11 +8,7 @@ CREATE TABLE
     );
 
 INSERT INTO
-    ADMINISTRATOR (
-        NAME_ADMIN,
-        EMAIL_ADMIN,
-        PASSWORD_ADMIN
-    )
+    ADMINISTRATOR (NAME_ADMIN, EMAIL_ADMIN, PASSWORD_ADMIN)
 VALUES
     ('kactuswow', 'kactuswow@gmail.com', 'admin'),
     ('Yademir', 'yademir@gmail.com', 'admin'),
