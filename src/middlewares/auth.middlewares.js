@@ -4,7 +4,7 @@ import { environment } from '../config/environment.js'
 export function authMiddleware (req, res, next) {
   const rawToken = req.headers.authorization
 
-  if (rawToken === undefined) {
+  if (!rawToken) {
     return res.json({
       message: 'No token provided'
     })
@@ -18,7 +18,7 @@ export function authMiddleware (req, res, next) {
   }
 
   jwt.verify(token, environment.jwtSalt, (error) => {
-    if (error != null) {
+    if (error) {
       return res.json({
         message: 'No token provided'
       })
