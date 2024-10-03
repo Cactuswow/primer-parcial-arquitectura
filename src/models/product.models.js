@@ -15,8 +15,12 @@ export const getProductOneModel = async (idProduct) => {
 }
 
 export const postProductModel = async (name, description, price) => {
-  const pg = new PgConnection()
-  return await pg.connection.query('INSERT INTO PRODUCT (NAME_PRODUCT, DESCRIPTION_PRODUCT, PRICE_PRODUCT) VALUES ($1, $2, $3) returning *', [name, description, price])
+  try {
+    const pg = new PgConnection()
+    return [false, await pg.connection.query('INSERT INTO PRODUCT (NAME_PRODUCT, DESCRIPTION_PRODUCT, PRICE_PRODUCT) VALUES ($1, $2, $3) returning *', [name, description, price])]
+  } catch (error) {
+    return [true]
+  }
 }
 
 export const putProductModel = async (name, description, price, idProduct) => {
