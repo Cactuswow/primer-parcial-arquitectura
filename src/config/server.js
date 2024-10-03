@@ -2,6 +2,8 @@ import express from 'express'
 import { environment } from './environment.js'
 import { PgConnection } from '../services/pgConnection.services.js'
 import { indexRoutes } from '../routes/index.routes.js'
+import { authMiddleware } from '../middlewares/auth.middlewares.js'
+import { dbMiddleware } from '../middlewares/db.middlewares.js'
 
 export class Server {
   constructor () {
@@ -15,6 +17,9 @@ export class Server {
 
   middlewares () {
     this.app.use(express.json())
+    this.app.use('/api/product', authMiddleware)
+    this.app.use('/api/product', dbMiddleware)
+    this.app.use('/auth', dbMiddleware)
   }
 
   routes () {
