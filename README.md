@@ -63,7 +63,7 @@ JWT_SALT = empanada
 src\
  |--config\         # Variables de entorno y configuración
  |--controllers\    # Controladores
- |--db\             #Sentencias SQL
+ |--db\             # Sentencias SQL
  |--middlewares\    # Middleware Personalizados
  |--models\         # PostgreSQL models (data layer)
  |--routes\         # Rutas del sistema
