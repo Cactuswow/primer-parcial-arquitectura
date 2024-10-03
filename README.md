@@ -45,6 +45,8 @@ Run Local:
 
 ## Variables de Entorno
 
+Crear archivo .env en la raíz del proyecto
+
 ```
 ###> CONFIG SERVER <####
 PORT = 8000
