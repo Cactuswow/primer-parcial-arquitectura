@@ -6,3 +6,10 @@ CREATE TABLE
         ADMINISTRATOR_PASSWORD VARCHAR(20) NOT NULL,
         PRIMARY KEY (ADMINISTRATOR_ID)
     );
+
+INSERT INTO
+    ADMINISTRATOR (ADMINISTRATOR_NAME, ADMINISTRATOR_EMAIL, ADMINISTRATOR_PASSWORD)
+VALUES
+    ('kactuswow', 'kactuswow@gmail.com', 'admin'),
+    ('Yademir', 'yademir@gmail.com', 'admin'),
+    ('wasa', 'wasa@gmail.com', 'admin');
