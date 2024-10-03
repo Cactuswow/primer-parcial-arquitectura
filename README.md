@@ -34,7 +34,7 @@ Run Local:
 ```
     npm run dev
 ```
-## Variables de Entorno
+## Variables de Entorno (.env)
 ```
 ###> CONFIG SERVER <####
 PORT = 8000
@@ -52,9 +52,9 @@ JWT_SALT = empanada
 src\
  |--config\         # Variables de entorno y configuración 
  |--controllers\    # Controladores
- |--db\             #Sentencias SQL
+ |--db\             # Sentencias SQL
  |--middlewares\    # Middleware Personalizados
- |--models\         # Postgrest models (data layer) 
+ |--models\         # Postgres models (data layer) 
  |--routes\         # Rutas del sistema
  |--services\       # Servicios de conexión BD y Token 
  |--validator\      # Esquemas de validación
