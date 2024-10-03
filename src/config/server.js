@@ -13,12 +13,17 @@ export class Server {
     new PgConnection()
   }
 
+  middlewares () {
+    this.app.use(express.json())
+  }
+
   routes () {
     this.app.use(indexRoutes)
   }
 
   runServer () {
     this.connectionDb()
+    this.middlewares()
     this.routes()
     this.app.listen(this.port, () => {
       console.log(`Server is running on http://localhost:${this.port}`)
