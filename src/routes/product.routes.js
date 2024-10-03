@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { getAllProducts, getProductOne } from '../controllers/product.controllers.js'
+import { deleteProduct, getAllProducts, getProductOne, postProduct, putProduct } from '../controllers/product.controllers.js'
 
 export const productRoutes = Router()
 
 productRoutes.get('/', getAllProducts)
 productRoutes.get('/:idProduct', getProductOne)
-productRoutes.post('/', getProductOne)
-productRoutes.put('/')
-productRoutes.delete('/')
+productRoutes.post('/', postProduct)
+productRoutes.put('/:idProduct', putProduct)
+productRoutes.delete('/:idProduct', deleteProduct)
