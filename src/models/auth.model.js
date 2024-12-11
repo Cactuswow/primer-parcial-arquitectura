@@ -1,8 +1,14 @@
 import { PgConnection } from '../services/pgConnection.services.js'
-export async function getUserModel (name, email, password) {
+export async function getUserModel (name, password) {
   try {
     const pg = new PgConnection()
-    return await pg.connection.query('SELECT * FROM ADMINISTRATOR WHERE NAME_ADMIN = $1 AND EMAIL_ADMIN = $2 AND PASSWORD_ADMIN = $3', [name, email, password])
+    return await pg.connection.query(
+      `SELECT name_admin as username,
+      image_admin as image
+       FROM ADMINISTRATOR
+       WHERE NAME_ADMIN = $1
+       AND PASSWORD_ADMIN = $2
+      `, [name, password])
   } catch (error) {
     return []
   }

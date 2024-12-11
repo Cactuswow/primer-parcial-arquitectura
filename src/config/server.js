@@ -4,6 +4,7 @@ import { PgConnection } from '../services/pgConnection.services.js'
 import { indexRoutes } from '../routes/index.routes.js'
 import { authMiddleware } from '../middlewares/auth.middlewares.js'
 import { dbMiddleware } from '../middlewares/db.middlewares.js'
+import cors from 'cors'
 
 export class Server {
   constructor () {
@@ -17,6 +18,7 @@ export class Server {
 
   middlewares () {
     this.app.use(express.json())
+    this.app.use(cors())
     this.app.use('/api/product', authMiddleware)
     this.app.use('/api/product', dbMiddleware)
     this.app.use('/auth', dbMiddleware)

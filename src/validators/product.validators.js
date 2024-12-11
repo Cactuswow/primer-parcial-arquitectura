@@ -20,9 +20,11 @@ export const getProductValidator = checkSchema(
 
 export const postProductValidator = checkSchema(
   {
-    name: { isString },
+    title: { isString },
     description: { isString },
-    price: { isFloat }
+    price: { isFloat },
+    thumbnail: { isString },
+    stock: { isInt }
   }, ['body']
 )
 
@@ -31,9 +33,12 @@ export const putProductValidator = checkSchema(
     idProduct: { isInt }
   }, ['params'],
   {
-    name: { isString },
+    title: { isString },
     description: { isString },
-    price: { isFloat }
+    price: { isFloat },
+    thumbnail: { isString },
+    stock: { isInt },
+    rating: { isFloat }
   }, ['body']
 )
 

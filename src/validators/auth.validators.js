@@ -4,11 +4,10 @@ const isString = {
 }
 
 export const loginValidator = checkSchema({
-  email: {
-    isEmail: {
-      errorMessage: 'Formato de email inválido'
-    }
-  },
   password: { isString },
   name: { isString }
 }, ['body'])
+
+export const meValidator = checkSchema({
+  token: { isString }
+}, ['params'])

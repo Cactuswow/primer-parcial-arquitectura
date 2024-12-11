@@ -2,11 +2,9 @@ import { deleteProductModel, getProductOneModel, getProductsModel, postProductMo
 
 export async function getAllProducts (req, res) {
   const dataProducts = await getProductsModel()
-  res.status(200).json({
-    success: true,
-    msg: 'Llegamos al getProducts',
-    data: dataProducts
-  })
+  res.status(200).json(
+    dataProducts
+  )
 }
 
 export async function getProductOne (req, res) {
@@ -18,16 +16,14 @@ export async function getProductOne (req, res) {
     })
   }
 
-  res.status(200).json({
-    success: true,
-    msg: 'Llegamos al getProductOne',
-    data: dataProduct
-  })
+  res.status(200).json(
+    dataProduct
+  )
 }
 
 export const postProduct = async (req, res) => {
-  const { name, description, price } = req.body
-  const [error, data] = await postProductModel(name, description, price)
+  const { title: name, description, price, stock, rating, thumbnail: image } = req.body
+  const [error, data] = await postProductModel(name, description, price, image, rating, stock)
 
   if (error) {
     return res.status(422).json({
@@ -36,17 +32,15 @@ export const postProduct = async (req, res) => {
     })
   }
 
-  res.status(200).json({
-    success: true,
-    msg: 'Llegamos al postProduct',
+  res.status(200).json(
     data
-  })
+  )
 }
 
 export const putProduct = async (req, res) => {
   const { idProduct } = req.params
-  const { name, description, price } = req.body
-  const [error, data] = await putProductModel(name, description, price, idProduct)
+  const { title: name, description, price, stock, rating, thumbnail: image } = req.body
+  const [error, data] = await putProductModel(name, description, price, image, rating, stock, idProduct)
 
   if (error) {
     return res.status(422).json({
@@ -55,18 +49,14 @@ export const putProduct = async (req, res) => {
     })
   }
 
-  res.status(200).json({
-    success: true,
-    msg: 'Llegamos al putProduct',
+  res.status(200).json(
     data
-  })
+  )
 }
 export const deleteProduct = async (req, res) => {
   const { idProduct } = req.params
   const data = await deleteProductModel(idProduct)
-  res.status(200).json({
-    success: true,
-    msg: 'Llegamos al deleteProduct',
+  res.status(200).json(
     data
-  })
+  )
 }
