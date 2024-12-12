@@ -2,6 +2,6 @@ import 'dotenv/config'
 
 export const environment = {
   port: Number(process.env.PORT) || 8000,
-  bdUrl: process.env.BD_URL || '',
-  jwtSalt: process.env.JWT_SALT || 'secret'
+  jwtSalt: process.env.JWT_SALT || 'secret',
+  postgresUrl: process.env.BD_URL || 'postgres://postgres:postgres@localhost:5432/postgres'
 }

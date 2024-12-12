@@ -4,7 +4,6 @@ import { environment } from '../config/environment.js'
 export class PgConnection {
   static instance
   static status = false
-
   constructor () {
     if (PgConnection.instance) {
       return PgConnection.instance
@@ -17,7 +16,12 @@ export class PgConnection {
   async createConnection () {
     try {
       const pgp = pgPromise({})
-      this.connection = pgp(environment.bdUrl)
+      this.connection = pgp({
+        connectionString: environment.postgresUrl,
+        ssl: {
+          rejectUnauthorized: false
+        }
+      })
       const response = await this.connection.connect()
       response.done()
       PgConnection.status = true
